@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/btnVis"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:text="Visitor"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:onClick="toVisPage"
-            />
-
-        <Button
-            android:id="@+id/btnEmp"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnVis"
-            android:text="Employee"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:onClick="toEmpPage"
-            />
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
 
 
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo_short"
+        android:layout_above="@+id/btnVis"
+        android:paddingTop="20dp"
+        android:elevation="15dp"
+        android:outlineAmbientShadowColor="#212121"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btnVis"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="187dp"
+        android:onClick="toVisPage"
+        android:text="Visitor"
+        android:background="@drawable/myrect"
+        />
+
+    <Button
+        android:id="@+id/btnEmp"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="122dp"
+        android:onClick="toEmpPage"
+        android:text="Employee"
+        android:background="@drawable/myrect"/>
+
+
+</RelativeLayout>

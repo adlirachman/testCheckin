@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.landing_page);
+        setContentView(R.layout.activity_loading_screen);
     }
 
     public void toVisPage(View view){

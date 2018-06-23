@@ -18,4 +18,5 @@
             android:textAppearance="@color/colorPrimary"
             android:textSize="128sp"/>
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>
