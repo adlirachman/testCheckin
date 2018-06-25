@@ -58,6 +58,7 @@
     </application>
 
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <uses-feature android:name="android.hardware.camera2"></uses-feature>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true"></uses-feature>
 
 </manifest>

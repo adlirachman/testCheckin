@@ -40,7 +40,7 @@ public class VisitorPage extends AppCompatActivity {
 
     public static class Visitor{
 
-        private String Nama,Email,Phone,Date;
+        private String Nama,Email,Phone;
 
         public String getNama() {
             return Nama;
@@ -67,25 +67,10 @@ public class VisitorPage extends AppCompatActivity {
         }
 
 
-        public String getDate() {
-            return Date;
-        }
-
-        public void setDate(String date) {
-            Date = date;
-        }
-
         public Visitor(String nama, String email, String phone) {
             Nama = nama;
             Email = email;
             Phone = phone;
-        }
-
-        public Visitor(String nama, String email, String phone, String date) {
-            Nama = nama;
-            Email = email;
-            Phone = phone;
-            Date = date;
         }
     }
 
@@ -102,6 +87,7 @@ public class VisitorPage extends AppCompatActivity {
         String PhoneVis = edtPhone.getText().toString();
 
 
+        DatabaseReference myRef = database.getReference("visitors");
         visitors.put(NamaVis, new Visitor(NamaVis,EmailVis,PhoneVis));
         myRef.setValue(visitors);
     }

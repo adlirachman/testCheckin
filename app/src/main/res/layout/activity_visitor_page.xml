@@ -60,11 +60,27 @@
         android:hint="Masukkan nomor telephone"
         android:inputType="phone"/>
 
+    <RelativeLayout
+        android:id="@+id/layoutFoto"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_below="@id/inputPhoneVis"
+        android:paddingTop="10dp">
+
+        <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/camera_icon"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--/>-->
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btnSimpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputPhoneVis"
+        android:layout_below="@+id/layoutFoto"
         android:layout_centerHorizontal="true"
         android:paddingTop="21dp"
         android:text="Simpan"
