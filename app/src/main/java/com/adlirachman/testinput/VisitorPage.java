@@ -1,6 +1,9 @@
 package com.adlirachman.testinput;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +32,10 @@ public class VisitorPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
     Map<String, Visitor> visitors = new HashMap<>();
+
+    private static final int REQUEST_CODE = 1;
+    private Bitmap bitmap;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,5 +102,7 @@ public class VisitorPage extends AppCompatActivity {
         visitors.put(NamaVis, new Visitor(NamaVis,EmailVis,PhoneVis));
         myRef.setValue(visitors);
     }
+
+
 
 }
