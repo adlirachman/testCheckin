@@ -24,7 +24,7 @@ public class loadingScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), landingPage.class));
                 finish();
             }
         }, 3000L); //3000 L = 3 detik

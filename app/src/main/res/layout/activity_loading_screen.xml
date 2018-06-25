@@ -8,13 +8,22 @@
     tools:context="com.adlirachman.testinput.landingPage"
     android:id="@+id/splash_screen">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/logo_long"
-        android:contentDescription="logo 41Studio"/>
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="logo 41Studio"
+            android:src="@drawable/logo_long"
+            android:scaleType="fitCenter"/>
+
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/progresBar1"

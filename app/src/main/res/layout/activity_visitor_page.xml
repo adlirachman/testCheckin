@@ -1,23 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VisitorPage">
-    <RelativeLayout
+    tools:context=".VisitorPage"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/namaVis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="28dp"/>
+
+    <EditText
+        android:id="@+id/inputNamaVis"
+        android:layout_below="@+id/namaVis"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:hint="Masukkan nama anda"
+        android:inputType="textPersonName|textCapWords" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="130dp"
-            android:layout_height="82dp"
-            android:text=""
-            android:textAppearance="@color/colorAccent"
-            android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/EmailVis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputNamaVis"
+        android:text="Alamat Email"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:fontFamily=""
+        android:paddingTop="10dp"/>
 
-    </RelativeLayout>
+    <EditText
+        android:id="@+id/inputEmailVis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EmailVis"
+        android:hint="Masukkan alamat email"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:id="@+id/PhoneVis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputEmailVis"
+        android:text="Phone Number"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:fontFamily=""
+        android:paddingTop="10dp"/>
+
+    <EditText
+        android:id="@+id/inputPhoneVis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PhoneVis"
+        android:hint="Masukkan nomor telephone"
+        android:inputType="phone"/>
+
+    <Button
+        android:id="@+id/btnSimpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputPhoneVis"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="21dp"
+        android:text="Simpan"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment="center"
+        android:onClick="simpan"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

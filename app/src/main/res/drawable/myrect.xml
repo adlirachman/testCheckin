@@ -15,10 +15,6 @@
         android:left="0dp"
         android:right="0dp"
         android:top="0dp">
-        <!--whatever you want in the background, here i preferred solid white -->
-        <shape android:shape="rectangle">
-            <solid android:color="#F57C00" />
 
-        </shape>
     </item>
 </layer-list>
