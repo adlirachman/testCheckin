@@ -11,13 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="512dp"
-            android:layout_height="512dp"
-            android:text="Employees Page"
+        <Button
+            android:id="@+id/btnEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutFoto"
             android:layout_centerInParent="true"
-            android:textAppearance="@color/colorPrimary"
-            android:textSize="128sp"/>
+            android:paddingTop="21dp"
+            android:text="Send Email"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAlignment="center"
+            android:onClick="sendEmail"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Camera;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +15,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,9 +39,10 @@ public class VisitorPage extends AppCompatActivity {
     DatabaseReference myRef;
     Map<String, Visitor> visitors = new HashMap<>();
 
-    private static final int REQUEST_CODE = 1;
-    private Bitmap bitmap;
+    ArrayList<Visitor> list = new ArrayList<Visitor>();
+
     private ImageView imageView;
+    private ValueEventListener postListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,8 @@ public class VisitorPage extends AppCompatActivity {
         edtNama = findViewById(R.id.inputNamaVis);
         edtEmail = findViewById(R.id.inputEmailVis);
         edtPhone = findViewById(R.id.inputPhoneVis);
+
+
 
 
     }
@@ -58,7 +67,7 @@ public class VisitorPage extends AppCompatActivity {
         }
 
         public void setNama(String nama) {
-            Nama = nama;
+            this.Nama = nama;
         }
 
         public String getEmail() {
@@ -66,7 +75,7 @@ public class VisitorPage extends AppCompatActivity {
         }
 
         public void setEmail(String email) {
-            Email = email;
+            this.Email = email;
         }
 
         public String getPhone() {
@@ -74,15 +83,19 @@ public class VisitorPage extends AppCompatActivity {
         }
 
         public void setPhone(String phone) {
-            Phone = phone;
+            this.Phone = phone;
         }
 
+        public Visitor() {
+
+        }
 
         public Visitor(String nama, String email, String phone) {
-            Nama = nama;
-            Email = email;
-            Phone = phone;
+            this.Nama = nama;
+            this.Email = email;
+            this.Phone = phone;
         }
+
     }
 
     public void testDatabase(View view){
@@ -91,7 +104,7 @@ public class VisitorPage extends AppCompatActivity {
         myRef.setValue("Test Database");
     }
 
-
+    //Storing data to Firebase
     public void simpan(View view){
         String NamaVis  = edtNama.getText().toString();
         String EmailVis = edtEmail.getText().toString();
@@ -99,8 +112,44 @@ public class VisitorPage extends AppCompatActivity {
 
 
         DatabaseReference myRef = database.getReference("visitors");
-        visitors.put(NamaVis, new Visitor(NamaVis,EmailVis,PhoneVis));
+        String key = myRef.push().getKey();
+        visitors.put(key, new Visitor(NamaVis,EmailVis,PhoneVis));
         myRef.setValue(visitors);
+    }
+
+    //Reading data from Firebase
+    DatabaseReference ref1 = database.getReference("visitors");
+    public void readFromFireBase(View view){
+       ref1.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(DataSnapshot dataSnapshot) {
+               for (DataSnapshot message: dataSnapshot.getChildren()){
+                   Visitor visitor = dataSnapshot.getValue(Visitor.class);
+                   tampilUser(visitor);
+               }
+
+
+
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+               System.out.println("The read failed: " + databaseError.getMessage());
+
+           }
+       });
+
+
+    }
+
+    public void tampilUser(Visitor visitor){
+        TextView tampilNama = (TextView) findViewById(R.id.outNama);
+        TextView tampilEmail = (TextView) findViewById(R.id.outEmail);
+        TextView tampilPhone = (TextView) findViewById(R.id.outPhone);
+
+        tampilNama.setText(visitor.getNama());
+        tampilEmail.setText(visitor.getEmail());
+        tampilPhone.setText(visitor.getPhone());
     }
 
 
