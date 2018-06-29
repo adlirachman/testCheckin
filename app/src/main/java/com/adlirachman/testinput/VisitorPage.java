@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Camera;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,11 +39,16 @@ public class VisitorPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
     Map<String, Visitor> visitors = new HashMap<>();
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
     ArrayList<Visitor> list = new ArrayList<Visitor>();
 
     private ImageView imageView;
     private ValueEventListener postListener;
+
+    static final int REQUEST_IMAGE_CAPTURE=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,7 @@ public class VisitorPage extends AppCompatActivity {
 
     public static class Visitor{
 
-        private String Nama,Email,Phone;
+        private String Nama,Email,Phone,Checkin,Checkout;
 
         public String getNama() {
             return Nama;
@@ -86,8 +92,32 @@ public class VisitorPage extends AppCompatActivity {
             this.Phone = phone;
         }
 
+        public String getCheckin() {
+            return Checkin;
+        }
+
+        public void setCheckin(String checkin) {
+            Checkin = checkin;
+        }
+
+        public String getCheckout() {
+            return Checkout;
+        }
+
+        public void setCheckout(String checkout) {
+            Checkout = checkout;
+        }
+
         public Visitor() {
 
+        }
+
+        public Visitor(String nama, String email, String phone, String checkin, String checkout) {
+            this.Nama = nama;
+            this.Email = email;
+            this.Phone = phone;
+            this.Checkin = checkin;
+            this.Checkout = checkout;
         }
 
         public Visitor(String nama, String email, String phone) {
@@ -111,10 +141,17 @@ public class VisitorPage extends AppCompatActivity {
         String PhoneVis = edtPhone.getText().toString();
 
 
-        DatabaseReference myRef = database.getReference("visitors");
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        date = dateFormat.format(calendar.getTime());
+        SimpleDateFormat jamFormat = new SimpleDateFormat("HH:mm:ss");
+        String jamCheckin = jamFormat.format(calendar.getTime());
+
+        DatabaseReference myRef = database.getReference("visitors/"+date);
         String key = myRef.push().getKey();
-        visitors.put(key, new Visitor(NamaVis,EmailVis,PhoneVis));
+        visitors.put(EmailVis, new Visitor(NamaVis,EmailVis,PhoneVis,jamCheckin,null));
         myRef.setValue(visitors);
+
     }
 
     //Reading data from Firebase
@@ -125,7 +162,7 @@ public class VisitorPage extends AppCompatActivity {
            public void onDataChange(DataSnapshot dataSnapshot) {
                for (DataSnapshot message: dataSnapshot.getChildren()){
                    Visitor visitor = dataSnapshot.getValue(Visitor.class);
-                   tampilUser(visitor);
+//                   tampilUser(visitor);
                }
 
 
@@ -142,16 +179,32 @@ public class VisitorPage extends AppCompatActivity {
 
     }
 
-    public void tampilUser(Visitor visitor){
-        TextView tampilNama = (TextView) findViewById(R.id.outNama);
-        TextView tampilEmail = (TextView) findViewById(R.id.outEmail);
-        TextView tampilPhone = (TextView) findViewById(R.id.outPhone);
+//    public void tampilUser(Visitor visitor){
+//        TextView tampilNama = (TextView) findViewById(R.id.outNama);
+//        TextView tampilEmail = (TextView) findViewById(R.id.outEmail);
+//        TextView tampilPhone = (TextView) findViewById(R.id.outPhone);
+//
+//        tampilNama.setText(visitor.getNama());
+//        tampilEmail.setText(visitor.getEmail());
+//        tampilPhone.setText(visitor.getPhone());
+//    }
 
-        tampilNama.setText(visitor.getNama());
-        tampilEmail.setText(visitor.getEmail());
-        tampilPhone.setText(visitor.getPhone());
+    public void dispatchTakePictureIntent(View view){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ImageView mImageView = (ImageView) findViewById(R.id.mImageView);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
+    }
 
 
 }

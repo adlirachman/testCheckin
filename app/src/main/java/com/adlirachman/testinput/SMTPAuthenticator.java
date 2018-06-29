@@ -11,8 +11,8 @@ public class SMTPAuthenticator extends Authenticator {
 
     @Override
     public PasswordAuthentication getPasswordAuthentication() {
-        String username = "youremail@gmail";
-        String password = "password";
+        String username = "41demostudio@gmail";
+        String password = "Demoonly";
         if ((username != null) && (username.length() > 0) && (password != null)
                 && (password.length() > 0)) {
 

@@ -21,7 +21,7 @@
             android:text="Send Email"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textAlignment="center"
-            android:onClick="sendEmail"/>
+            android:onClick="onClick"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -81,7 +81,7 @@ class Mail extends javax.mail.Authenticator {
 
             Session session = Session.getInstance(props, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("youremail@gmail", "password");
+                    return new PasswordAuthentication("41demostudio@gmail", "Demoonly");
                 }
             });
             SMTPAuthenticator authentication = new SMTPAuthenticator();
@@ -111,7 +111,7 @@ class Mail extends javax.mail.Authenticator {
             props.put("mail." + protocol + ".auth", "true");
             Transport t = session.getTransport(protocol);
             try {
-                t.connect("smtp.gmail.com", "youremail@gmail", "password");
+                t.connect("smtp.gmail.com", "41demostudio@gmail", "Demoonly");
                 t.sendMessage(msg, msg.getAllRecipients());
             } finally {
                 t.close();
